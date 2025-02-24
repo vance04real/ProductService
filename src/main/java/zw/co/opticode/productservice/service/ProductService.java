@@ -26,6 +26,10 @@ public class ProductService {
         if(product.getPrice().compareTo(BigDecimal.ONE) <= 0) {
             throw new ProductValidationException("Product price must be greater than zero");
         }
+
+        if(product.getStock() < 0){
+            throw new ProductValidationException("Product stock must be zero or greater");
+        }
         return productRepository.save(product);
     }
 }
