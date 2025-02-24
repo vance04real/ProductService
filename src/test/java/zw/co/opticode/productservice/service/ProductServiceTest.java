@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import zw.co.opticode.productservice.model.Category;
 import zw.co.opticode.productservice.model.Product;
+import zw.co.opticode.productservice.model.Vendor;
 import zw.co.opticode.productservice.service.repository.ProductRepository;
 
 import java.math.BigDecimal;
@@ -29,15 +31,26 @@ public class ProductServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        sampleProduct = new Product();
 
+        Category category = new Category();
+        category.setId(1L);
+        category.setName("Electronics");
+        category.setParentCategory(null);
+
+        Vendor vendor = new Vendor();
+        vendor.setId(1L);
+        vendor.setName("Tech Store");
+        vendor.setEmail("vendor@example.com");
+        vendor.setStoreName("Tech World");
+
+        sampleProduct = new Product();
         sampleProduct.setId(1L);
         sampleProduct.setName("Test Product");
         sampleProduct.setDescription("Sample Description");
-        sampleProduct.setPrice(BigDecimal.valueOf(100));
+        sampleProduct.setPrice(new BigDecimal("100.00"));
         sampleProduct.setStock(10);
-        sampleProduct.setCategoryId(1L);
-        sampleProduct.setVendorId(1L);
+        sampleProduct.setCategory(category);
+        sampleProduct.setVendor(vendor);
     }
 
 
