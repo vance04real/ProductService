@@ -4,6 +4,8 @@ import zw.co.opticode.productservice.exceptions.ProductValidationException;
 import zw.co.opticode.productservice.model.Product;
 import zw.co.opticode.productservice.service.repository.ProductRepository;
 
+import java.math.BigDecimal;
+
 public class ProductService {
 
     private final ProductRepository productRepository;
@@ -19,6 +21,10 @@ public class ProductService {
 
         if (product.getVendor() == null) {
             throw new ProductValidationException("Product vendor is required");
+        }
+
+        if(product.getPrice().compareTo(BigDecimal.ONE) <= 0) {
+            throw new ProductValidationException("Product price must be greater than zero");
         }
         return productRepository.save(product);
     }
