@@ -101,4 +101,16 @@ public class ProductServiceTest {
         verify(productRepository, never()).save(any(Product.class));
     }
 
+    @Test
+    void shouldFailToCreateProductWithNegativePrice() {
+        sampleProduct.setPrice(BigDecimal.TEN.negate());
+
+        Exception exception = assertThrows(ProductValidationException.class, () -> {
+            productService.createProduct(sampleProduct);
+        });
+
+        assertThat(exception.getMessage()).isEqualTo("Product price must be greater than zero");
+        verify(productRepository, never()).save(any(Product.class));
+    }
+
 }
