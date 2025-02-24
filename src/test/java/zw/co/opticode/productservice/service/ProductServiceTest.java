@@ -14,8 +14,9 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 public class ProductServiceTest {
@@ -68,6 +69,21 @@ public class ProductServiceTest {
         assertThat(createdProduct.getId()).isNotNull();
         assertThat(createdProduct.getId()).isEqualTo(1L);
         assertThat(createdProduct.getName()).isEqualTo("Test Product");
+    }
+
+    @Test
+    void shouldFailToCreateProductWithoutCategory() {
+        // Given
+        sampleProduct.setCategory(null);
+
+        // When
+        Exception exception = assertThrows(ProductValidationException.class, () -> {
+            productService.createProduct(sampleProduct);
+        });
+
+        // Then
+        assertThat(exception.getMessage()).isEqualTo("Product category is required");
+        verify(productRepository, never()).save(any(Product.class));
     }
 
 }
