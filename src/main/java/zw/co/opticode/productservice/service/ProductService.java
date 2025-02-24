@@ -1,5 +1,6 @@
 package zw.co.opticode.productservice.service;
 
+import zw.co.opticode.productservice.exceptions.ProductValidationException;
 import zw.co.opticode.productservice.model.Product;
 import zw.co.opticode.productservice.service.repository.ProductRepository;
 
@@ -12,6 +13,9 @@ public class ProductService {
     }
 
     public Product createProduct(Product product) {
+        if(product.getCategory() == null) {
+            throw new ProductValidationException("Product category is required");
+        }
         return productRepository.save(product);
     }
 }

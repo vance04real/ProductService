@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import zw.co.opticode.productservice.exceptions.ProductValidationException;
 import zw.co.opticode.productservice.model.Category;
 import zw.co.opticode.productservice.model.Product;
 import zw.co.opticode.productservice.model.Vendor;
@@ -16,7 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 
 public class ProductServiceTest {
