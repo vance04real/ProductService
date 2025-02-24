@@ -89,4 +89,15 @@ public class ProductServiceTest {
         verify(productRepository, never()).save(any(Product.class));
     }
 
+    @Test
+    void shouldFailToCreateProductWithoutVendor() {
+        sampleProduct.setVendor(null);
+
+        Exception exception = assertThrows(ProductValidationException.class, () -> {
+            productService.createProduct(sampleProduct);
+        });
+
+        assertThat(exception.getMessage()).isEqualTo("Product must have a vendor");
+        verify(productRepository, never()).save(any(Product.class));
+    }
 }
