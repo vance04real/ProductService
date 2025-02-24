@@ -8,6 +8,8 @@ import org.mockito.MockitoAnnotations;
 import zw.co.opticode.productservice.model.Product;
 import zw.co.opticode.productservice.service.repository.ProductRepository;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -28,8 +30,14 @@ public class ProductServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         sampleProduct = new Product();
+
         sampleProduct.setId(1L);
         sampleProduct.setName("Test Product");
+        sampleProduct.setDescription("Sample Description");
+        sampleProduct.setPrice(BigDecimal.valueOf(100));
+        sampleProduct.setStock(10);
+        sampleProduct.setCategoryId(1L);
+        sampleProduct.setVendorId(1L);
     }
 
 
