@@ -113,4 +113,16 @@ public class ProductServiceTest {
         verify(productRepository, never()).save(any(Product.class));
     }
 
+    @Test
+    void shouldFailToCreateProductWithNegativeStock() {
+        sampleProduct.setStock(-5);
+
+        Exception exception = assertThrows(ProductValidationException.class, () -> {
+            productService.createProduct(sampleProduct);
+        });
+
+        assertThat(exception.getMessage()).isEqualTo("Product stock must be zero or greater");
+        verify(productRepository, never()).save(any(Product.class));
+    }
+
 }
