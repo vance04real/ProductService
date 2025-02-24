@@ -1,8 +1,10 @@
 package zw.co.opticode.productservice.service;
 
 import org.junit.jupiter.api.Test;
+import zw.co.opticode.productservice.model.Product;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class ProductServiceTest {
 
@@ -21,8 +23,9 @@ public class ProductServiceTest {
 
 
         // Then
-        assertThat(createdProduct).isNotNull();
+        assertThat(createdProduct.getId()).isNotNull();
         assertThat(createdProduct.getId()).isEqualTo(1L);
         assertThat(createdProduct.getName()).isEqualTo("Test Product");
     }
+
 }
