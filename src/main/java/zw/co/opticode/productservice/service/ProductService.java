@@ -16,6 +16,10 @@ public class ProductService {
         if(product.getCategory() == null) {
             throw new ProductValidationException("Product category is required");
         }
+
+        if (product.getVendor() == null) {
+            throw new ProductValidationException("Product vendor is required");
+        }
         return productRepository.save(product);
     }
 }

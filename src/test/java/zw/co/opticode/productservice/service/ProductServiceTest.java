@@ -97,7 +97,7 @@ public class ProductServiceTest {
             productService.createProduct(sampleProduct);
         });
 
-        assertThat(exception.getMessage()).isEqualTo("Product must have a vendor");
+        assertThat(exception.getMessage()).isEqualTo("Product vendor is required");
         verify(productRepository, never()).save(any(Product.class));
     }
 
